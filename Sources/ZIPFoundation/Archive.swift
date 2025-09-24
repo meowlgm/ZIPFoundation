@@ -2,7 +2,7 @@
 //  Archive.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2024 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -278,6 +278,8 @@ public final class Archive: Sequence {
         var index = minEndOfCentralDirectoryOffset
         fseeko(file, 0, SEEK_END)
         let archiveLength = Int64(ftello(file))
+        guard archiveLength >= 0 else { return nil }
+
         while eocdOffset == 0 && index <= archiveLength {
             fseeko(file, off_t(archiveLength - index), SEEK_SET)
             var potentialDirectoryEndTag: UInt32 = UInt32()
