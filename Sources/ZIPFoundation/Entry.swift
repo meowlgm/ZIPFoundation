@@ -150,7 +150,10 @@ public struct Entry: Equatable {
             let mode = mode_t(modeValue) & S_IFMT
             switch mode {
             case S_IFREG:
-                return .file
+                // Some libraries incorrectly mark directories as S_IFREG.
+                // If the path has a trailing "/", it takes precedence over file type flags
+                // and must be treated as a directory.
+                return isDirectory ? .directory : .file
             case S_IFDIR:
                 return .directory
             case S_IFLNK:
