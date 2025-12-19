@@ -133,7 +133,7 @@ public struct Entry: Equatable {
     /// - Note: Always returns `0` for entries of type `EntryType.directory`.
     public var checksum: CRC32 {
         if self.centralDirectoryStructure.usesDataDescriptor {
-            return self.zip64DataDescriptor?.crc32 ?? self.dataDescriptor?.crc32 ?? self.centralDirectoryStructure.crc32
+            return self.zip64DataDescriptor?.crc32 ?? self.dataDescriptor?.crc32 ?? 0
         }
         return self.centralDirectoryStructure.crc32
     }
