@@ -19,6 +19,11 @@ extension Entry {
         let nameCRC32: UInt32
         let unicodeName: Data
     }
+
+    var infoZipExtraField: InfoZipUnicodePath? {
+        let extraField = self.localFileHeader.extraFields?.first { $0 is InfoZipUnicodePath }
+        return extraField as? InfoZipUnicodePath
+    }
 }
 
 extension Entry.InfoZipUnicodePath {
