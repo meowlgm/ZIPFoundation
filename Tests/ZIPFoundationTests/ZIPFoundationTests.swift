@@ -255,7 +255,7 @@ extension ZIPFoundationTests {
             ("testFileModificationDate", testFileModificationDate),
             ("testFileModificationDateHelperMethods", testFileModificationDateHelperMethods),
             ("testInvalidSymlinkCompressionMethodErrorConditions", testInvalidSymlinkCompressionMethodErrorConditions)
-        ] + zip64Tests + darwinOnlyTests + swift5OnlyTests
+        ] + zip64Tests + darwinOnlyTests + swift5OnlyTests + infoZipTests
     }
 
     static var zip64Tests: [(String, (ZIPFoundationTests) -> () throws -> Void)] {
@@ -293,6 +293,12 @@ extension ZIPFoundationTests {
             ("testExtractEntryWithZIP64DataDescriptor", testExtractEntryWithZIP64DataDescriptor),
             ("testUnzipSymlink", testUnzipSymlink),
             ("testUnzipCompressedSymlink", testUnzipCompressedSymlink)
+        ]
+    }
+
+    static var infoZipTests: [(String, (ZIPFoundationTests) -> () throws -> Void)] {
+        return [
+            ("testEntryScanForInfoZip", testEntryScanForInfoZip)
         ]
     }
 

@@ -65,6 +65,8 @@ extension Entry.LocalFileHeader {
         if let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(in: self.extraFieldData,
                                                                                            fields: self.validFields) {
             self.extraFields = [zip64ExtendedInformation]
+        } else if let infoZipUnicodePath = Entry.InfoZipUnicodePath.scanForUnicodePath(in: self.extraFieldData) {
+            self.extraFields = [infoZipUnicodePath]
         }
     }
 }
