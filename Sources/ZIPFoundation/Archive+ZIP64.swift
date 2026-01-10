@@ -13,11 +13,6 @@ import Foundation
 let zip64EOCDRecordStructSignature = 0x06064b50
 let zip64EOCDLocatorStructSignature = 0x07064b50
 
-enum ExtraFieldHeaderID: UInt16 {
-    case zip64ExtendedInformation = 0x0001
-    case infoZipUnicodePath = 0x7075
-}
-
 extension Archive {
     struct ZIP64EndOfCentralDirectory {
         let record: ZIP64EndOfCentralDirectoryRecord

@@ -21,9 +21,9 @@ extension ZIPFoundationTests {
                                                    0xb7, 0xef, 0xbc, 0x88, 0xe9, 0x99, 0x84, 0xe4, 0xbb,
                                                    0xb6, 0xef, 0xbc, 0x89, 0x5f, 0x54, 0x65, 0x73, 0x74,
                                                    0x2e, 0x64, 0x6f, 0x63, 0x78]
-        let infoZip = Entry.InfoZipUnicodePath.scanForUnicodePath(in: Data(extraFieldBytesWithInfoZip))
-        XCTAssertEqual(infoZip?.headerID, ExtraFieldHeaderID.infoZipUnicodePath.rawValue)
-        XCTAssertNotNil(infoZip)
+        let infoZIP = Entry.InfoZIPUnicodePath.scanForUnicodePath(in: Data(extraFieldBytesWithInfoZip))
+        XCTAssertEqual(infoZIP?.headerID, Archive.ExtraFieldHeaderID.infoZIPUnicodePath.rawValue)
+        XCTAssertNotNil(infoZIP)
     }
 
     func testInfoZIPUnicodePath() {

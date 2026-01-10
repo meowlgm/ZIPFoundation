@@ -12,23 +12,23 @@ import Foundation
 
 extension Entry {
 
-    struct InfoZipUnicodePath: ExtensibleDataField {
-        var headerID: UInt16 { ExtraFieldHeaderID.infoZipUnicodePath.rawValue }
+    struct InfoZIPUnicodePath: ExtensibleDataField {
+        var headerID: UInt16 { Archive.ExtraFieldHeaderID.infoZIPUnicodePath.rawValue }
         let dataSize: UInt16
         let version: UInt8
         let nameCRC32: UInt32
         let unicodeName: Data
     }
 
-    var infoZipExtraField: InfoZipUnicodePath? {
-        let extraField = self.localFileHeader.extraFields?.first { $0 is InfoZipUnicodePath }
-        return extraField as? InfoZipUnicodePath
+    var infoZIPExtraField: InfoZIPUnicodePath? {
+        let extraField = self.localFileHeader.extraFields?.first { $0 is InfoZIPUnicodePath }
+        return extraField as? InfoZIPUnicodePath
     }
 }
 
-extension Entry.InfoZipUnicodePath {
+extension Entry.InfoZIPUnicodePath {
 
-    static func scanForUnicodePath(in data: Data) -> Entry.InfoZipUnicodePath? {
+    static func scanForUnicodePath(in data: Data) -> Entry.InfoZIPUnicodePath? {
         guard data.isEmpty == false else { return nil }
         var offset = 0
         var headerID: UInt16
@@ -42,13 +42,13 @@ extension Entry.InfoZipUnicodePath {
             let nextOffset = offset + headerSize + Int(dataSize)
             guard nextOffset <= extraFieldLength else { return nil }
 
-            if headerID == ExtraFieldHeaderID.infoZipUnicodePath.rawValue {
+            if headerID == Archive.ExtraFieldHeaderID.infoZIPUnicodePath.rawValue {
                 let fieldData = data.subdata(in: offset..<nextOffset)
                 let version: UInt8 = fieldData.scanValue(start: 4)
                 let nameCRC32: UInt32 = fieldData.scanValue(start: 5)
                 let unicodeNameData = fieldData.subdata(in: 9..<fieldData.count)
 
-                return Entry.InfoZipUnicodePath(
+                return Entry.InfoZIPUnicodePath(
                     dataSize: dataSize,
                     version: version,
                     nameCRC32: nameCRC32,

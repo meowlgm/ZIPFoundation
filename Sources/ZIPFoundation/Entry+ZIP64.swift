@@ -23,7 +23,7 @@ extension Entry {
     }
 
     struct ZIP64ExtendedInformation: ExtensibleDataField {
-        let headerID: UInt16 = ExtraFieldHeaderID.zip64ExtendedInformation.rawValue
+        let headerID: UInt16 = Archive.ExtraFieldHeaderID.zip64ExtendedInformation.rawValue
         let dataSize: UInt16
         static let headerSize: UInt16 = 4
         let uncompressedSize: UInt64
@@ -152,7 +152,7 @@ extension Entry.ZIP64ExtendedInformation {
             dataSize = data.scanValue(start: offset + 2)
             let nextOffset = offset + headerSize + Int(dataSize)
             guard nextOffset <= extraFieldLength else { return nil }
-            if headerID == ExtraFieldHeaderID.zip64ExtendedInformation.rawValue {
+            if headerID == Archive.ExtraFieldHeaderID.zip64ExtendedInformation.rawValue {
                 return Entry.ZIP64ExtendedInformation(data: data.subdata(in: offset..<nextOffset), fields: fields)
             }
             offset = nextOffset

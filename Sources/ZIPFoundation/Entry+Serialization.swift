@@ -62,12 +62,15 @@ extension Entry.LocalFileHeader {
         subRangeStart += Int(self.fileNameLength)
         subRangeEnd = subRangeStart + Int(self.extraFieldLength)
         self.extraFieldData = additionalData.subdata(in: subRangeStart..<subRangeEnd)
+        var extraFields: [ExtensibleDataField] = []
         if let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(in: self.extraFieldData,
                                                                                            fields: self.validFields) {
-            self.extraFields = [zip64ExtendedInformation]
-        } else if let infoZipUnicodePath = Entry.InfoZipUnicodePath.scanForUnicodePath(in: self.extraFieldData) {
-            self.extraFields = [infoZipUnicodePath]
+            extraFields.append(zip64ExtendedInformation)
         }
+        if let infoZIPUnicodePath = Entry.InfoZIPUnicodePath.scanForUnicodePath(in: self.extraFieldData) {
+            extraFields.append(infoZIPUnicodePath)
+        }
+        self.extraFields = extraFields
     }
 }
 

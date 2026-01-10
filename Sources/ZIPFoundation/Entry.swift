@@ -120,8 +120,8 @@ public struct Entry: Equatable {
     /// The `path` of the receiver within a ZIP `Archive`.
     public var path: String {
         // Read Info-ZIP Unicode Path extra field if present
-        if let infoZipExtraField = self.infoZipExtraField {
-            return String(pathData: infoZipExtraField.unicodeName, encoding: .utf8)
+        if let infoZIPExtraField = self.infoZIPExtraField {
+            return String(pathData: infoZIPExtraField.unicodeName, encoding: .utf8)
         }
         let encoding = self.centralDirectoryStructure.usesUTF8PathEncoding ? String.Encoding.utf8 : .codepage437
         return self.path(using: encoding)
