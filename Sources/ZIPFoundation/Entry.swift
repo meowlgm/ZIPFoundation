@@ -119,6 +119,14 @@ public struct Entry: Equatable {
     }
     /// The `path` of the receiver within a ZIP `Archive`.
     public var path: String {
+        // Read Info-ZIP Unicode Path extra field if present
+        if let infoZIPExtraField = self.infoZIPExtraField {
+            // Validate CRC32 before using the Unicode name
+            let originalFilenameCRC32 = self.centralDirectoryStructure.fileNameData.crc32(checksum: 0)
+            if infoZIPExtraField.nameCRC32 == originalFilenameCRC32 {
+                return String(pathData: infoZIPExtraField.unicodeName, encoding: .utf8)
+            }
+        }
         let encoding = self.centralDirectoryStructure.usesUTF8PathEncoding ? String.Encoding.utf8 : .codepage437
         return self.path(using: encoding)
     }
