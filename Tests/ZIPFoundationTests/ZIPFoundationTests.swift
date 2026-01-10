@@ -298,7 +298,8 @@ extension ZIPFoundationTests {
 
     static var infoZipTests: [(String, (ZIPFoundationTests) -> () throws -> Void)] {
         return [
-            ("testEntryScanForInfoZip", testEntryScanForInfoZip)
+            ("testEntryScanForInfoZip", testEntryScanForInfoZip),
+            ("testInfoZIPUnicodePath", testInfoZIPUnicodePath)
         ]
     }
 

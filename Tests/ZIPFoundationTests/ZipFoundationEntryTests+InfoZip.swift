@@ -22,6 +22,14 @@ extension ZIPFoundationTests {
                                                    0xb6, 0xef, 0xbc, 0x89, 0x5f, 0x54, 0x65, 0x73, 0x74,
                                                    0x2e, 0x64, 0x6f, 0x63, 0x78]
         let infoZip = Entry.InfoZipUnicodePath.scanForUnicodePath(in: Data(extraFieldBytesWithInfoZip))
+        XCTAssertEqual(infoZip?.headerID, ExtraFieldHeaderID.infoZipUnicodePath.rawValue)
         XCTAssertNotNil(infoZip)
+    }
+
+    func testInfoZIPUnicodePath() {
+        let fileManager = FileManager()
+        let archive = self.archive(for: #function, mode: .read)
+        let destinationURL = self.createDirectory(for: #function)
+        XCTAssertNoThrow(try fileManager.unzipItem(at: archive.url, to: destinationURL))
     }
 }

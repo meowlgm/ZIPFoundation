@@ -13,7 +13,7 @@ import Foundation
 extension Entry {
 
     struct InfoZipUnicodePath: ExtensibleDataField {
-        let headerID: UInt16 = ExtraFieldHeaderID.infoZipUnicodePath.rawValue
+        var headerID: UInt16 { ExtraFieldHeaderID.infoZipUnicodePath.rawValue }
         let dataSize: UInt16
         let version: UInt8
         let nameCRC32: UInt32
