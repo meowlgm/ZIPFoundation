@@ -293,7 +293,7 @@ extension ZIPFoundationTests {
             ("testExtractEntryWithZIP64DataDescriptor", testExtractEntryWithZIP64DataDescriptor),
             ("testUnzipSymlink", testUnzipSymlink),
             ("testUnzipCompressedSymlink", testUnzipCompressedSymlink),
-            ("testEntryScanForInfoZip", testEntryScanForInfoZip),
+            ("testEntryScanForInfoZIP", testEntryScanForInfoZIP),
             ("testInfoZIPUnicodePath", testInfoZIPUnicodePath)
         ]
     }

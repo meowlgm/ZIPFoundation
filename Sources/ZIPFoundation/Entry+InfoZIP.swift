@@ -1,5 +1,5 @@
 //
-//  Entry+InfoZip.swift
+//  Entry+InfoZIP.swift
 //  ZIPFoundation
 //
 //  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
